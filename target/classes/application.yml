@@ -1,0 +1,104 @@
+# Configuration de l'application SIOP Spring Boot
+# Remplace la configuration JSON de la version Bash
+
+spring:
+  application:
+    name: siop-spring-boot
+
+  # Configuration de la base de données Oracle
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.1.45:1521/Rawbkv11
+    username: Rawbk05100
+    password: oracle
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # Configuration JPA/Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle12cDialect
+        format_sql: true
+
+  # Configuration du serveur
+  server:
+    port: 8080
+    servlet:
+      context-path: /siop
+
+  # Configuration des logs
+  logging:
+    level:
+      com.rawbank.siop: INFO
+      org.springframework.jdbc: DEBUG
+      org.springframework.mail: DEBUG
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file:
+      name: logs/siop-application.log
+      max-size: 10MB
+      max-history: 30
+
+  # Configuration du mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+# Configuration SIOP spécifique
+siop:
+  email:
+    cc:
+      - eminence@rawbank.cd
+      - supervision@rawbank.cd
+    subject: "Virement SIOP nécessitant votre attention"
+
+  query:
+    default-date: "14/10/2025"
+    sql-file: "siop_send_mail.sql"
+
+  scheduler:
+    enabled: true
+    cron: "0 */15 * * * *" # Toutes les 15 minutes
+
+# Configuration Actuator pour le monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+
+# Configuration des informations de l'application
+info:
+  app:
+    name: SIOP Spring Boot Application
+    description: Application Spring Boot pour la gestion des rapports SIOP
+    version: 1.0.0
+    encoding: UTF-8
+    java:
+      version: 17

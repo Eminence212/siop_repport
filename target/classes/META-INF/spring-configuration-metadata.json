@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "name": "siop",
+      "type": "com.rawbank.siop.config.SiopProperties",
+      "sourceType": "com.rawbank.siop.config.SiopProperties"
+    },
+    {
+      "name": "siop.email",
+      "type": "com.rawbank.siop.config.SiopProperties$Email",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "public com.rawbank.siop.config.SiopProperties.Email getEmail() "
+    },
+    {
+      "name": "siop.query",
+      "type": "com.rawbank.siop.config.SiopProperties$Query",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "public com.rawbank.siop.config.SiopProperties.Query getQuery() "
+    },
+    {
+      "name": "siop.scheduler",
+      "type": "com.rawbank.siop.config.SiopProperties$Scheduler",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "public com.rawbank.siop.config.SiopProperties.Scheduler getScheduler() "
+    }
+  ],
+  "properties": [
+    {
+      "name": "siop.email.cc",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Email"
+    },
+    {
+      "name": "siop.email.subject",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Email"
+    },
+    {
+      "name": "siop.query.default-date",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Query"
+    },
+    {
+      "name": "siop.query.sql-file",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Query"
+    },
+    {
+      "name": "siop.scheduler.cron",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Scheduler"
+    },
+    {
+      "name": "siop.scheduler.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Scheduler"
+    }
+  ],
+  "hints": []
+}

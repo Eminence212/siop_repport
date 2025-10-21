@@ -1,0 +1,62 @@
+# Configuration de production pour SIOP Spring Boot
+
+spring:
+  # Configuration Oracle de production
+  datasource:
+    url: jdbc:oracle:thin:@//prod-oracle-server:1521/PRODDB
+    username: ${ORACLE_USERNAME:siop_user}
+    password: ${ORACLE_PASSWORD:siop_password}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # Configuration mail de production
+  mail:
+    host: ${SMTP_HOST:smtp.rawbank.cd}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:siop@rawbank.cd}
+    password: ${SMTP_PASSWORD:siop_password}
+
+  # Configuration des logs de production
+  logging:
+    level:
+      com.rawbank.siop: INFO
+      org.springframework.jdbc: WARN
+      org.springframework.mail: WARN
+    file:
+      name: /var/log/siop/siop-application.log
+      max-size: 50MB
+      max-history: 90
+
+# Configuration SIOP de production
+siop:
+  email:
+    cc:
+      - eminence@rawbank.cd
+      - supervision@rawbank.cd
+      - admin@rawbank.cd
+    subject: "Virement SIOP nécessitant votre attention"
+
+  query:
+    default-date: "14/10/2025"
+    sql-file: "siop_send_mail.sql"
+
+  scheduler:
+    enabled: true
+    cron: "0 */15 * * * *" # Toutes les 15 minutes
+
+# Configuration Actuator pour la production
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+  info:
+    env:
+      enabled: true
