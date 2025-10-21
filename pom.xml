@@ -15,6 +15,7 @@
     <groupId>com.rawbank</groupId>
     <artifactId>siop-spring-boot</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
     <name>SIOP Spring Boot Application</name>
     <description>Application Spring Boot pour la gestion des rapports SIOP</description>
 
@@ -54,6 +55,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
+        <!-- Tomcat embedded pour le packaging WAR -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Base de données Oracle -->
@@ -127,6 +135,17 @@
                             <artifactId>spring-boot-configuration-processor</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            
+            <!-- Plugin Maven WAR pour générer le fichier WAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <warName>siop-spring-boot</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             

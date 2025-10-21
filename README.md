@@ -1,6 +1,6 @@
 # SIOP Spring Boot Application
 
-Application Spring Boot pour la gestion des rapports SIOP, remplaçant la version Bash avec des fonctionnalités améliorées.
+Application Spring Boot pour la gestion des rapports SIOP.
 
 ## 🚀 Fonctionnalités
 
@@ -12,14 +12,6 @@ Application Spring Boot pour la gestion des rapports SIOP, remplaçant la versio
 - **API REST** : Endpoints pour la gestion manuelle
 - **Monitoring** : Actuator pour la surveillance
 - **Sécurité** : Configuration sécurisée des credentials
-
-### ✅ **Améliorations par rapport à la version Bash**
-
-- **Performance** : Pool de connexions Oracle optimisé
-- **Scalabilité** : Architecture Spring Boot
-- **Monitoring** : Observabilité complète
-- **Sécurité** : Gestion sécurisée des credentials
-- **Maintenance** : Code structuré et testable
 
 ## 📋 Prérequis
 
@@ -140,10 +132,15 @@ mvn test
 ### **3. Package**
 
 ```bash
+# Générer le fichier WAR
 mvn clean package
+
+# Le fichier WAR sera généré dans : target/siop-spring-boot.war
 ```
 
 ### **4. Exécution**
+
+#### **Option A : Exécution standalone (JAR)**
 
 ```bash
 # Développement
@@ -153,13 +150,51 @@ java -jar target/siop-spring-boot-1.0.0.jar
 java -jar target/siop-spring-boot-1.0.0.jar --spring.profiles.active=prod
 ```
 
+#### **Option B : Déploiement WAR sur serveur d'application**
+
+**Tomcat :**
+
+```bash
+# Copier le fichier WAR dans le dossier webapps de Tomcat
+cp target/siop-spring-boot.war $TOMCAT_HOME/webapps/
+
+# Redémarrer Tomcat
+$TOMCAT_HOME/bin/shutdown.sh
+$TOMCAT_HOME/bin/startup.sh
+```
+
+**WebLogic/WebSphere :**
+
+- Déployer via la console d'administration du serveur
+- Ou utiliser les outils de déploiement du serveur
+
 ### **5. Docker (Optionnel)**
+
+#### **Option A : Docker avec JAR**
 
 ```dockerfile
 FROM openjdk:17-jre-slim
 COPY target/siop-spring-boot-1.0.0.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+#### **Option B : Docker avec WAR (Tomcat)**
+
+```dockerfile
+FROM tomcat:9-jre17
+COPY target/siop-spring-boot.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+```
+
+#### **Option C : Docker avec WAR (Jetty)**
+
+```dockerfile
+FROM jetty:9-jre17
+COPY target/siop-spring-boot.war /var/lib/jetty/webapps/
+EXPOSE 8080
+CMD ["java", "-jar", "/usr/local/jetty/start.jar"]
 ```
 
 ## 📡 API Endpoints
@@ -311,30 +346,6 @@ mvn verify
 jmeter -n -t siop-load-test.jmx
 ```
 
-## 📈 Migration depuis la Version Bash
-
-### **Étapes de Migration**
-
-1. **Sauvegarde** de la configuration actuelle
-2. **Déploiement** de la version Spring Boot
-3. **Configuration** des credentials
-4. **Tests** de fonctionnement
-5. **Désactivation** de l'ancien cron
-6. **Monitoring** de la nouvelle version
-
-### **Comparaison des Fonctionnalités**
-
-| Fonctionnalité  | Version Bash | Version Spring Boot |
-| --------------- | ------------ | ------------------- |
-| **Exécution**   | Cron         | Scheduler Spring    |
-| **Performance** | ⭐⭐         | ⭐⭐⭐⭐⭐          |
-| **Monitoring**  | ⭐           | ⭐⭐⭐⭐⭐          |
-| **Sécurité**    | ⭐⭐         | ⭐⭐⭐⭐⭐          |
-| **Maintenance** | ⭐⭐         | ⭐⭐⭐⭐⭐          |
-| **API**         | ❌           | ✅                  |
-| **Logs**        | Basique      | Avancé              |
-| **Métriques**   | ❌           | ✅                  |
-
 ## 🆘 Dépannage
 
 ### **Problèmes Courants**
@@ -388,20 +399,6 @@ curl http://localhost:8080/actuator/health
 curl http://localhost:8080/api/siop/test-connection
 ```
 
-## 📞 Support
-
-### **Documentation**
-
-- **API** : Swagger UI (si configuré)
-- **Logs** : Fichiers de log détaillés
-- **Métriques** : Actuator endpoints
-
-### **Contact**
-
-- **Équipe** : ScolarisPlus
-- **Version** : 1.0.0
-- **Support** : Documentation complète incluse
-
 ## 🎯 Avantages de la Version Spring Boot
 
 ### **✅ Performance**
@@ -432,8 +429,18 @@ curl http://localhost:8080/api/siop/test-connection
 
 - Architecture modulaire
 - API REST extensible
-- Déploiement flexible
+- Déploiement flexible (JAR/WAR)
+- Support serveurs d'application
+
+### **✅ Déploiement WAR**
+
+- **Tomcat** : Déploiement direct
+- **WebLogic/WebSphere** : Support enterprise
+- **Jetty** : Alternative légère
+- **Docker** : Images optimisées
 
 ---
 
-**Version Spring Boot** : Remplace complètement la version Bash avec des fonctionnalités améliorées et une architecture moderne.
+**Version** : 1.0.0  
+**Dernière mise à jour** : Octobre 2024  
+**Auteur** : ScolarisPlus Team
