@@ -442,5 +442,5 @@ curl http://localhost:8080/api/siop/test-connection
 ---
 
 **Version** : 1.0.0  
-**Dernière mise à jour** : Octobre 2024  
-**Auteur** : ScolarisPlus Team
+**Dernière mise à jour** : Octobre 2025  
+**Auteur** : Micro-Apps Integration Team
