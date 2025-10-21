@@ -1,0 +1,65 @@
+{
+  "groups": [
+    {
+      "name": "siop",
+      "type": "com.rawbank.siop.config.SiopProperties",
+      "sourceType": "com.rawbank.siop.config.SiopProperties"
+    },
+    {
+      "name": "siop.email",
+      "type": "com.rawbank.siop.config.SiopProperties$Email",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "getEmail()"
+    },
+    {
+      "name": "siop.query",
+      "type": "com.rawbank.siop.config.SiopProperties$Query",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "getQuery()"
+    },
+    {
+      "name": "siop.scheduler",
+      "type": "com.rawbank.siop.config.SiopProperties$Scheduler",
+      "sourceType": "com.rawbank.siop.config.SiopProperties",
+      "sourceMethod": "getScheduler()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "siop.email.cc",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Email"
+    },
+    {
+      "name": "siop.email.subject",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Email",
+      "defaultValue": "Virement SIOP nécessitant votre attention"
+    },
+    {
+      "name": "siop.query.default-date",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Query",
+      "defaultValue": "14\/10\/2025"
+    },
+    {
+      "name": "siop.query.sql-file",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Query",
+      "defaultValue": "siop_send_mail.sql"
+    },
+    {
+      "name": "siop.scheduler.cron",
+      "type": "java.lang.String",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Scheduler",
+      "defaultValue": "0 *\/15 * * * *"
+    },
+    {
+      "name": "siop.scheduler.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.rawbank.siop.config.SiopProperties$Scheduler",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

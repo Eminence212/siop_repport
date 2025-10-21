@@ -3,13 +3,13 @@
 
 spring:
   application:
-    name: siop-spring-boot
+    name: siop-spring-report
 
   # Configuration de la base de données Oracle
   datasource:
-    url: jdbc:oracle:thin:@//192.168.1.45:1521/Rawbkv11
-    username: Rawbk05100
-    password: oracle
+    url: jdbc:oracle:thin:@//${ORACLE_SERVER_IP}:${ORACLE_SERVER_PORT}/${ORACLE_SERVER_SERVICE}
+    username: ${ORACLE_USERNAME}
+    password: ${ORACLE_PASSWORD}
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       maximum-pool-size: 10
@@ -50,10 +50,10 @@ spring:
 
   # Configuration du mail
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: your-email@gmail.com
-    password: your-app-password
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
     properties:
       mail:
         smtp:

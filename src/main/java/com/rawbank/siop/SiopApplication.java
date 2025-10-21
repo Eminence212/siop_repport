@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * - Envoi d'emails individuels aux gestionnaires
  * - Scheduler pour l'exécution périodique
  * 
- * @author ScolarisPlus
+ * @author Eminence
  * @version 1.0.0
  */
 @SpringBootApplication
